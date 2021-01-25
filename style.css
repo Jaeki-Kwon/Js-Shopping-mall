@@ -21,6 +21,7 @@ h2 {
 section {
   background-color: #f0eef6;
   height: 65vh;
+  overflow-y: auto;
 }
 input {
   width: 99.1%;

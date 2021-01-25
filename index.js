@@ -30,6 +30,7 @@ const click = () => {
 
   i.addEventListener("click", deleteMenu);
   input.value = "";
+  input.focus();
 };
 
 const enter = (e) => {
