@@ -1,43 +1,51 @@
-const btn = document.querySelector(".circle");
-const section = document.querySelector("section");
-const input = document.querySelector("input");
+const items = document.querySelector(".items");
+const input = document.querySelector(".footer__input");
+const addBtn = document.querySelector(".footer__button");
 
-const deleteMenu = (event) => {
-  const btn = event.target;
-  const menu = btn.parentNode;
-  //   console.log(event.target.parentNode);
-  section.removeChild(menu);
-};
-
-const click = () => {
-  const div = document.createElement("div");
-  const span = document.createElement("span");
-  const i = document.createElement("i");
-
-  div.setAttribute("class", "menu");
-  span.setAttribute("class", "menu-kind");
-  i.setAttribute("class", "fas fa-trash-alt");
-
-  span.textContent = input.value;
-
-  if (input.value === "") {
-    console.log("빈칸");
-  } else {
-    section.appendChild(div);
-    div.appendChild(span);
-    div.appendChild(i);
+function onAdd() {
+  const text = input.value;
+  if (text === "") {
+    input.focus();
+    return;
   }
-
-  i.addEventListener("click", deleteMenu);
+  const item = createItem(text);
+  items.appendChild(item);
+  item.scrollIntoView({ block: "center" });
   input.value = "";
   input.focus();
-};
+}
 
-const enter = (e) => {
-  if (e.key === "Enter") {
-    click();
+let id = 0;
+function createItem(text) {
+  const itemRow = document.createElement("li");
+  itemRow.setAttribute("class", "item__row");
+  itemRow.setAttribute("data-id", id);
+  itemRow.innerHTML = `
+        <div class="item">
+            <span class="item__name">${text}</span>
+            <button class="item__delete">
+                <i class="fas fa-trash-alt" data-id=${id}></i>
+            </button>
+        </div>
+        <div class="item__divider"></div>`;
+  id++;
+  return itemRow;
+}
+
+addBtn.addEventListener("click", () => {
+  onAdd();
+});
+
+input.addEventListener("keypress", (event) => {
+  if (event.key === "Enter") {
+    onAdd();
   }
-};
+});
 
-input.addEventListener("keypress", enter);
-btn.addEventListener("click", click);
+items.addEventListener("click", (event) => {
+  const id = event.target.dataset.id;
+  if (id) {
+    const toBeDeleted = document.querySelector(`.item__row[data-id="${id}"]`);
+    toBeDeleted.remove();
+  }
+});

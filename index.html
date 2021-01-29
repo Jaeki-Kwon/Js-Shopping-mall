@@ -8,23 +8,19 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
-    <title>Shoppingmall</title>
+    <script src="index.js" defer></script>
+    <title>Shopping mall</title>
   </head>
   <body>
-    <div class="main">
-      <header>
-        <h2>Shopping List</h2>
-      </header>
-      <section></section>
-      <nav>
-        <input type="text" />
-      </nav>
-      <footer>
-        <div class="circle">
-          <h1 class="btn__plus">+</h1>
-        </div>
+    <section class="list">
+      <header class="header">Shopping List</header>
+      <ul class="items"></ul>
+      <footer class="footer">
+        <input type="text" class="footer__input" />
+        <button class="footer__button">
+          <i class="fas fa-plus"></i>
+        </button>
       </footer>
-    </div>
-    <script src="index.js"></script>
+    </section>
   </body>
 </html>
